@@ -1,1 +1,126 @@
+.thumbnail {
+	cursor: pointer;
+}
 
+canvas {
+	width: 100% !important;
+	height: auto !important;
+	margin-top: 10px;
+	margin-bottom: 15px;
+}
+
+.textfill {
+	height: 52.8px;
+	width: auto;
+	margin-top: 10px;
+	margin-bottom: 0;
+	/*display: -webkit-flex;
+	-webkit-flex-wrap: wrap;
+    -webkit-align-items: center;
+	-webkit-justify-content: center;
+    display: flex;
+	flex-wrap: wrap;
+    align-items: center;
+	justify-content: center;*/
+	text-align: center;
+	overflow: hidden;
+	white-space: normal;
+}
+
+.quote {
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+.url,
+.url:hover,
+.url:active,
+.url:visited,
+.url:focus {
+	text-decoration: none !important;
+	color: #333;
+}
+
+.all-polls {
+	margin-top: 20px;
+	margin-bottom: 35px;
+}
+
+.sort > label,
+.sort > select {
+	display: inline-block;
+}
+
+.sort > select {
+	width: auto;
+}
+
+.sort {
+	margin-top: -20px;
+	margin-bottom: 20px;
+	vertical-align: middle;
+	display: inline-block;
+}
+
+.filter > label,
+.filter > select {
+	display: inline-block;
+}
+
+.filter > select {
+	width: auto;
+}
+
+.filter {
+	margin-top: -20px;
+	margin-bottom: 20px;
+	vertical-align: middle;
+	display: inline-block;
+}
+
+.search {
+	margin-top: -20px;
+	margin-bottom: 20px;
+	vertical-align: middle;
+	display: inline-block;
+}
+
+.red,
+.red:hover,
+.red:active,
+.red:visited,
+.red:focus {
+	color: red;
+	opacity: .4;
+	font-size: 14px;
+	vertical-align: middle;
+	padding-right: 2px;
+	padding-left: 2px;
+	margin-right: -2px;
+	margin-left: -2px;
+}
+
+.green,
+.green:hover,
+.green:active,
+.green:visited,
+.green:focus {
+	color: green;
+	opacity: .4;
+	font-size: 14px;
+	vertical-align: middle;
+	padding-right: 2px;
+	padding-left: 2px;
+	margin-right: -2px;
+	margin-left: -2px;
+}
+
+.noPoll {
+	margin-top: 0;
+	margin-bottom: 20px;
+}
+
+.pagination {
+	margin-right: auto;
+	margin-left: auto;
+}

@@ -10,9 +10,9 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<base href="/">
-	<title>FCC Basejump: Build a Vating App</title>
+	<title>Pollnomena</title>
 	<meta name="description" content="">
-	<meta name="viewport" content="width=device-width">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 	<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 	<!-- build:css(client) app/vendor.css -->
 	<!-- bower:css -->
@@ -24,21 +24,32 @@
 	<link rel="stylesheet" href="app/app.css">
 	<!-- injector:css -->
 	<link rel="stylesheet" href="app/account/login/login.css">
+	<link rel="stylesheet" href="app/account/logout/logout.css">
+	<link rel="stylesheet" href="app/account/settings/settings.css">
+	<link rel="stylesheet" href="app/account/signup/signup.css">
 	<link rel="stylesheet" href="app/admin/admin.css">
 	<link rel="stylesheet" href="app/app.css">
 	<link rel="stylesheet" href="app/main/main.css">
+	<link rel="stylesheet" href="app/main/user/poll/poll.css">
+	<link rel="stylesheet" href="app/main/user/user.css">
 	<link rel="stylesheet" href="app/polls/polls.css">
 	<link rel="stylesheet" href="components/modal/modal.css">
+	<link rel="stylesheet" href="components/navbar/navbar.css">
 	<!-- endinjector -->
 	<!-- endbuild -->
 </head>
 
-<body ng-app="buildAVotingAppApp">
+<body ng-app="buildAVotingAppApp" class="loaded">
 	<!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 	<!-- Add your site or application content here -->
 	<div ng-view=""></div>
+	<div id="loader-wrapper">
+		<div id="loader"></div>
+		<div class="loader-section section-left"></div>
+		<div class="loader-section section-right"></div>
+	</div>
 	<!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
 	<script>
 	(function(i, s, o, g, r, a, m) {
@@ -64,6 +75,7 @@
 	<!-- bower:js -->
 	<script src="bower_components/jquery/dist/jquery.js"></script>
 	<script src="bower_components/angular/angular.js"></script>
+	<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
 	<script src="bower_components/angular-resource/angular-resource.js"></script>
 	<script src="bower_components/angular-cookies/angular-cookies.js"></script>
 	<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
@@ -71,6 +83,11 @@
 	<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
 	<script src="bower_components/lodash/dist/lodash.compat.js"></script>
 	<script src="bower_components/angular-socket-io/socket.js"></script>
+	<script src="bower_components/Chart.js/Chart.js"></script>
+	<script src="bower_components/jquery-textfill/source/jquery.textfill.js"></script>
+	<script src="bower_components/xcolor/jquery.xcolor.js"></script>
+	<script src="bower_components/zeroclipboard/dist/ZeroClipboard.js"></script>
+	<script src="bower_components/ng-clip/src/ngClip.js"></script>
 	<!-- endbower -->
 	<script src="socket.io-client/socket.io.js"></script>
 	<!-- endbuild -->
@@ -79,16 +96,21 @@
 	<!-- injector:js -->
 	<script src="app/account/account.js"></script>
 	<script src="app/account/login/login.controller.js"></script>
+	<script src="app/account/logout/logout.controller.js"></script>
 	<script src="app/account/settings/settings.controller.js"></script>
 	<script src="app/account/signup/signup.controller.js"></script>
 	<script src="app/admin/admin.controller.js"></script>
 	<script src="app/admin/admin.js"></script>
 	<script src="app/main/main.controller.js"></script>
 	<script src="app/main/main.js"></script>
+	<script src="app/main/user/poll/poll.controller.js"></script>
+	<script src="app/main/user/user.controller.js"></script>
 	<script src="app/polls/polls.controller.js"></script>
 	<script src="app/polls/polls.js"></script>
 	<script src="components/auth/auth.service.js"></script>
 	<script src="components/auth/user.service.js"></script>
+	<script src="components/filters/renderHtml.js"></script>
+	<script src="components/filters/renderMongoId.js"></script>
 	<script src="components/modal/modal.service.js"></script>
 	<script src="components/mongoose-error/mongoose-error.directive.js"></script>
 	<script src="components/navbar/navbar.controller.js"></script>

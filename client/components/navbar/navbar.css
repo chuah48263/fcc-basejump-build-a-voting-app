@@ -1,0 +1,37 @@
+.navbar-toggle {
+	float: left;
+	margin-left: 8px;
+	margin-right: 8px;
+}
+
+.navbar-brand {
+	position: absolute;
+	width: 100%;
+	left: 0;
+	top: 0;
+	text-align: center;
+	margin: auto !important;
+	z-index: -1
+}
+
+.navbar-nav {
+	display: inline-block;
+}
+
+.navbar-left,
+.navbar-left > li {
+	float: left;
+}
+
+.navbar-right,
+.navbar-right > li {
+	float: right;
+}
+
+.navbar {
+	margin-bottom: 0;
+}
+
+.navbar-right:first-child {
+	margin-right: 0 !important;
+}

@@ -2,6 +2,7 @@
 
 angular.module('buildAVotingAppApp')
   .controller('AdminCtrl', function ($scope, $http, Auth, User) {
+  	$('body').addClass('loaded');
 
     // Use the User $resource to fetch all users
     $scope.users = User.query();

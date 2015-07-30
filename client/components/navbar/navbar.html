@@ -7,23 +7,39 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a href="/" class="navbar-brand">FCC Basejump: Build a Voting App</a>
+			<a href="/" class="navbar-brand">Pollnomena</a>
 		</div>
 		<div collapse="isCollapsed" class="navbar-collapse collapse" id="navbar-main">
-			<ul class="nav navbar-nav">
-				<li ng-repeat="item in menu" ng-class="{active: isActive(item.link)}">
-					<a ng-href="{{item.link}}">{{item.title}}</a>
+			<ul class="nav navbar-nav navbar-left">
+				<li ng-class="{active: isActive('/')}">
+					<a href="/" data-toggle="tooltip" title="Home" data-placement="bottom"><i class="fa fa-home"></i></a>
 				</li>
-				<li ng-show="isAdmin()" ng-class="{active: isActive('/admin')}"><a href="/admin">Admin</a></li>
+				<li ng-class="{active: isActive('/polls')}">
+					<a href="/polls" id="polls" data-toggle="tooltip" title="All Polls" data-placement="bottom"><i class="fa fa-th"></i></a>
+				</li>
+				<li ng-show="isLoggedIn() && !isAdmin()" ng-class="{active: isActive('/' + getCurrentUser().name) && isCreate('create')}">
+					<a ng-href="{{'/' + getCurrentUser().name + '?action=create'}}" id="create" data-toggle="tooltip" title="Create Poll" data-placement="bottom"><i class="fa fa-plus"></i></a>
+				</li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-				<li ng-hide="isLoggedIn()" ng-class="{active: isActive('/signup')}"><a href="/signup">Sign up</a></li>
-				<li ng-hide="isLoggedIn()" ng-class="{active: isActive('/login')}"><a href="/login">Login</a></li>
-				<li ng-show="isLoggedIn()">
-					<p class="navbar-text">Hello {{ getCurrentUser().name }}</p>
+				<li ng-show="isLoggedIn()" ng-class="{active: isActive('/logout')}">
+					<a href="/logout" id="logout" data-toggle="tooltip" title="Logout" data-placement="bottom"><i class="fa fa-sign-out"></i></a>
 				</li>
-				<li ng-show="isLoggedIn()" ng-class="{active: isActive('/settings')}"><a href="/settings"><span class="glyphicon glyphicon-cog"></span></a></li>
-				<li ng-show="isLoggedIn()" ng-class="{active: isActive('/logout')}"><a href="" ng-click="logout()">Logout</a></li>
+				<li ng-show="isLoggedIn()" ng-class="{active: isActive('/settings')}">
+					<a href="/settings" data-toggle="tooltip" title="Change Password" data-placement="bottom"><i class="fa fa-cog"></i></a>
+				</li>
+				<li ng-show="isLoggedIn() && !isAdmin()" ng-class="{active: isActive('/' + getCurrentUser().name) && isCreate(undefined)}">
+					<a ng-href="{{'/' + getCurrentUser().name}}" id="user" data-toggle="tooltip" title="Your Polls" data-placement="bottom"><i class="fa fa-user"></i></a>
+				</li>
+				<li ng-show="isAdmin()" ng-class="{active: isActive('/admin')}">
+					<a href="/admin" data-toggle="tooltip" title="Admin" data-placement="bottom"><i class="fa fa-user-secret"></i></a>
+				</li>
+				<li ng-hide="isLoggedIn()" ng-class="{active: isActive('/login')}">
+					<a href="/login" data-toggle="tooltip" title="Login" data-placement="bottom"><i class="fa fa-sign-in"></i></a>
+				</li>
+				<li ng-hide="isLoggedIn()" ng-class="{active: isActive('/signup')}">
+					<a href="/signup" data-toggle="tooltip" title="Signup" data-placement="bottom"><i class="fa fa-user-plus"></i></a>
+				</li>
 			</ul>
 		</div>
 	</div>

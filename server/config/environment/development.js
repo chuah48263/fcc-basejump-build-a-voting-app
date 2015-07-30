@@ -3,10 +3,10 @@
 // Development specific configuration
 // ==================================
 module.exports = {
-  // MongoDB connection options
-  mongo: {
-    uri: 'mongodb://localhost/buildavotingapp-dev'
-  },
+	// MongoDB connection options
+	mongo: {
+		uri: 'mongodb://localhost/buildavotingapp-dev'
+	},
 
-  seedDB: true
+	seedDB: false
 };

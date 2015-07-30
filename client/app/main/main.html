@@ -8,19 +8,30 @@
 <div class="container">
 	<div class="row">
 		<div class="col-lg-12">
-			<h1 class="page-header">Features:</h1>
-			<ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="thing in awesomeThings">
-				<li><a href="#" tooltip="{{thing.info}}">{{thing.name}}<button type="button" class="close" ng-click="deleteThing(thing)">&times;</button></a></li>
+			<div class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="poll in polls track by $index">
+				<div>{{poll.pollName}}
+					<div class="radio" ng-repeat="pollOption in poll.pollOptions track by $index">
+						<label><input type="radio" name="optradio" ng-click="votePoll(poll, $index)" ng-value="pollOption.label">{{pollOption.label}}: {{pollOption.value}}</label>
+					</div>
+					<button type="button" class="close" ng-click="deletePoll(poll)">&times;</button>
+				</div>
 			</ul>
 		</div>
 	</div>
-	<form class="thing-form">
+	<form class="poll-form">
 		<label>Syncs in realtime across clients</label>
 		<p class="input-group">
-			<input type="text" class="form-control" placeholder="Add a new thing here." ng-model="newThing">
+			<input type="text" class="form-control" placeholder="Add a new poll here." ng-model="pollName">
+			<fieldset data-ng-repeat="pollOption in pollOptions track by $index">
+				<input type="text" ng-model="pollOption.label" class="form-control">
+				<button type="button" class="close" ng-click="removePollOption($index)">-</button>
+			</fieldset>
 			<span class="input-group-btn">
-        <button type="submit" class="btn btn-primary" ng-click="addThing()">Add New</button>
-      </span>
+				<button type="button" class="btn btn-primary" ng-click="addPollOption()">+</button>
+			</span>
+			<span class="input-group-btn">
+				<button type="submit" class="btn btn-primary" ng-click="addPoll()">Add New</button>
+			</span>
 		</p>
 	</form>
 </div>

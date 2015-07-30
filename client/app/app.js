@@ -6,16 +6,36 @@ angular.module('buildAVotingAppApp', [
 		'ngSanitize',
 		'ngRoute',
 		'btford.socket-io',
-		'ui.bootstrap'
+		'ui.bootstrap',
+		'ngClipboard'
 	])
-	.config(function($routeProvider, $locationProvider, $httpProvider) {
+	.config(function($routeProvider, $locationProvider, $httpProvider, ngClipProvider) {
 		$routeProvider
+			.when('/polls', {
+				redirectTo: '/polls'
+			})
+			.when('/admin', {
+				redirectTo: '/admin'
+			})
+			.when('/login', {
+				redirectTo: '/login'
+			})
+			.when('/logout', {
+				redirectTo: '/logout'
+			})
+			.when('/signup', {
+				redirectTo: '/signup'
+			})
+			.when('/settings', {
+				redirectTo: '/settings'
+			})
 			.otherwise({
 				redirectTo: '/'
 			});
 
 		$locationProvider.html5Mode(true);
 		$httpProvider.interceptors.push('authInterceptor');
+		ngClipProvider.setPath('bower_components/zeroclipboard/dist/ZeroClipboard.swf');
 	})
 
 .factory('authInterceptor', function($rootScope, $q, $cookieStore, $location) {

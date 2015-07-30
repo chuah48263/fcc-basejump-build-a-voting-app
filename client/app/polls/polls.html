@@ -1,4 +1,45 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
-<div class="col-md-12">
-	This is the polls view.
+<div class="container">
+	<div class="row text-center">
+		<h1 class="all-polls">All Polls</h1>
+		<div class="col-md-3 col-md-offset-1 col-xs-12 sort">
+			<label>Sort by:&nbsp;</label>
+			<select class="form-control" ng-model="orderByData" ng-init="orderByData = order[0].value" ng-options="option.value as option.title for option in order"></select>
+		</div>
+		<div class="col-md-4 col-xs-12 filter">
+			<label>Filter by Voting Status:&nbsp;</label>
+			<select class="form-control" ng-model="filterByData" ng-init="filterByData = filter[0]" ng-options="option as option for option in filter"></select>
+		</div>
+		<div class="col-md-3 col-xs-12 search">
+			<form name="form" ng-submit="searchButton()">
+				<div class="input-group">
+					<input type="text" class="form-control" name="search" placeholder="Search..." ng-model="search">
+					<span class="input-group-btn">
+	 					<button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
+					</span>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<div class="container">
+	<div class="row">
+		<div class="col-xs-12 col-md-4" ng-repeat="poll in polls | orderBy:orderByData | filter:searched" ng-show="filterBy(poll.pollClosed)">
+			<a ng-href="{{poll.url}}" class="url">
+				<div class="thumbnail btn btn-default" ng-click="vote(poll.url)">
+					<div id="{{'textfill' + poll.pollId}}" class="textfill">
+						<span>{{poll.pollName}}
+							<i class="fa fa-circle red" ng-show="poll.pollClosed"></i>
+							<i class="fa fa-circle green" ng-hide="poll.pollClosed"></i>
+						</span>
+					</div>
+					<p class="quote">by&nbsp;<a id="{{'href' + $index}}" ng-href="{{'/' + poll.authorName}}"><i>{{poll.authorName}}</i></a></p>
+					<canvas id="{{'chart' + poll.pollId}}"></canvas>
+				</div>
+			</a>
+		</div>
+	</div>
+	<div class="text-center" ng-show="noPoll">
+		<h3 class="noPoll">No poll available...</h3>
+	</div>
 </div>

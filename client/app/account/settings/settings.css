@@ -1,0 +1,14 @@
+.settings {
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.settings-submit {
+	margin-top: 5px;
+	margin-bottom: 20px;
+}
+
+.notLoggedIn {
+	margin-top: -5px;
+	margin-bottom: 20px;
+}

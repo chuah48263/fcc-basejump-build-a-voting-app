@@ -1,39 +1,32 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
-
 <div class="container">
-  <div class="row">
-    <div class="col-sm-12">
-      <h1>Change Password</h1>
-    </div>
-    <div class="col-sm-12">
-      <form class="form" name="form" ng-submit="changePassword(form)" novalidate>
-
-        <div class="form-group">
-          <label>Current Password</label>
-
-          <input type="password" name="password" class="form-control" ng-model="user.oldPassword"
-                 mongoose-error/>
-          <p class="help-block" ng-show="form.password.$error.mongoose">
-              {{ errors.other }}
-          </p>
-        </div>
-
-        <div class="form-group">
-          <label>New Password</label>
-
-          <input type="password" name="newPassword" class="form-control" ng-model="user.newPassword"
-                 ng-minlength="3"
-                 required/>
-          <p class="help-block"
-             ng-show="(form.newPassword.$error.minlength || form.newPassword.$error.required) && (form.newPassword.$dirty || submitted)">
-            Password must be at least 3 characters.
-          </p>
-        </div>
-
-        <p class="help-block"> {{ message }} </p>
-
-        <button class="btn btn-lg btn-primary" type="submit">Save changes</button>
-      </form>
-    </div>
-  </div>
+	<div class="row">
+		<div class="col-md-12 col-xs-12">
+			<h1 class="text-center settings">Change Password</h1>
+		</div>
+		<div class="col-md-6 col-md-offset-3 col-xs-12">
+			<form class="form" name="form" ng-submit="changePassword(form)" novalidate>
+				<div class="form-group" ng-class="{ 'has-success': form.password.$valid && submitted, 'has-error': form.password.$invalid && submitted && !success}">
+					<label>Current Password</label>
+					<input id="password" type="password" name="password" class="form-control" ng-disabled="success" ng-model="user.oldPassword" mongoose-error required/>
+					<p class="help-block" ng-show="form.password.$error.required && submitted">Please verify your current password.</p>
+					<p class="help-block" ng-show="form.password.$error.mongoose">{{ errors.other }}</p>
+				</div>
+				<div class="form-group" ng-class="{ 'has-success': form.newPassword.$valid && submitted, 'has-error': form.newPassword.$invalid && submitted && !success}">
+					<label>New Password</label>
+					<input id="newPassword" type="password" name="newPassword" class="form-control" ng-disabled="success" ng-model="user.newPassword" ng-minlength="3" required mongoose-error/>
+					<p class="help-block" ng-show="(form.newPassword.$error.minlength || form.newPassword.$error.required) && submitted && !success">New password must be at least 3 characters long.</p>
+				</div>
+				<div class="form-group has-success">
+					<p class="help-block" ng-show="submitted">{{ message }}</p>
+				</div>
+				<div class="text-center">
+					<button id="submit" class="btn btn-lg btn-primary settings-submit" ng-disabled="success" type="submit">Submit</button>
+				</div>
+				<div class="form-group has-error">
+					<p class="help-block notLoggedIn text-center">{{ notLoggedIn }}</p>
+				</div>
+			</form>
+		</div>
+	</div>
 </div>

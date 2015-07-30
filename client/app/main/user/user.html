@@ -1,0 +1,121 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+<div ng-hide="isAuthor" class="container">
+	<div class="row text-center">
+		<h1 class="all-polls">{{user}}'s Polls</h1>
+		<div class="col-md-3 col-md-offset-1 col-xs-12 sort">
+			<label>Sort by:&nbsp;</label>
+			<select class="form-control" ng-model="orderByData" ng-init="orderByData = order[0].value" ng-options="option.value as option.title for option in order"></select>
+		</div>
+		<div class="col-md-4 col-xs-12 filter">
+			<label>Filter by Voting Status:&nbsp;</label>
+			<select class="form-control" ng-model="filterByData" ng-init="filterByData = filter[0]" ng-options="option as option for option in filter"></select>
+		</div>
+		<div class="col-md-3 col-xs-12 search">
+			<form name="form" ng-submit="searchButton()">
+				<div class="input-group">
+					<input type="text" class="form-control" name="search" placeholder="Search..." ng-model="search">
+					<span class="input-group-btn">
+	 					<button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
+					</span>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<ul ng-show="isAuthor" class="nav nav-tabs">
+	<li id="viewButton" role="presentation" ng-class="{active: view}" ng-click="view = true; create = false"><a ng-click="viewButton()">Your Polls</a></li>
+	<li id="createButton" role="presentation" ng-class="{active: create}" ng-click="create = true; view = false"><a ng-click="createButton()">Create Poll</a></li>
+</ul>
+<div ng-show="view" class="container">
+	<div class="text-center" ng-show="isAuthor">
+		<h1 class="your-polls"></h1>
+		<div class="col-md-3 col-md-offset-1 col-xs-12 sort">
+			<label>Sort by:&nbsp;</label>
+			<select class="form-control" ng-model="orderByData" ng-init="orderByData = order[0].value" ng-options="option.value as option.title for option in order"></select>
+		</div>
+		<div class="col-md-4 col-xs-12 filter">
+			<label>Filter by Voting Status:&nbsp;</label>
+			<select class="form-control" ng-model="filterByData" ng-init="filterByData = filter[0]" ng-options="option as option for option in filter"></select>
+		</div>
+		<div class="col-md-3 col-xs-12 search">
+			<form name="form" ng-submit="searchButton()">
+				<div class="input-group">
+					<input type="text" class="form-control" name="search" placeholder="Search..." ng-model="search">
+					<span class="input-group-btn">
+	 					<button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
+					</span>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-12 col-md-4" ng-repeat="poll in polls | orderBy:orderByData | filter:searched" ng-show="filterBy(poll.pollClosed)">
+			<a ng-href="{{poll.url}}" class="url">
+				<div class="thumbnail btn btn-default" ng-click="vote(poll.url)" id="thumbnail">
+					<div id="{{'textfill' + poll.pollId}}" class="textfill">
+						<span>{{poll.pollName}}
+							<i class="fa fa-circle red" ng-show="poll.pollClosed"></i>
+							<i class="fa fa-circle green" ng-hide="poll.pollClosed"></i>
+						</span>
+					</div>
+					<p class="quote">created on&nbsp;{{poll._id | renderMongoId | date:'yyyy/MM/dd'}}</p>
+					<canvas id="{{'chart' + poll.pollId}}"></canvas>
+				</div>
+			</a>
+		</div>
+	</div>
+	<div class="text-center" ng-show="noPoll">
+		<h3 class="noPoll">You have no poll yet...</h3>
+	</div>
+</div>
+<form ng-show="create" class="form" name="form" ng-submit="createPoll()">
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12 col-md-6 col-md-offset-3">
+				<div class="form-group" id="pollNameParent">
+					<label>Poll Name:</label>
+					<input type="text" id="pollName" ng-disabled="created" class="form-control input-lg" placeholder="Enter poll name here..." ng-model="pollName">
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12 col-md-6 col-md-offset-3">
+				<div class="form-group options">
+					<label>Poll Options:</label>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12 col-md-6 col-md-offset-3" ng-repeat="pollOption in pollOptions track by $index">
+				<div class="input-group input-group-lg" id="{{'pollOptionParent' + $index}}">
+					<span id="{{'pollOptionColor' + $index}}" class="input-group-btn">
+						<button class="btn btn-default pollOptionColor" type="button" ng-style="{'background-color': pollOption.color, 'color': pollOption.color}" ng-click="generateRandomColor($index)"><i class="fa fa-pencil"></i></button>
+					</span>
+					<input type="text" id="{{'pollOption' + $index}}" ng-disabled="created" class="form-control pollOption" placeholder="Enter poll option here..." ng-model="pollOption.label">
+					<span id="{{'pollOptionMinus' + $index}}" class="input-group-btn"><button class="btn btn-default pollOptionMinus" ng-disabled="created" type="button" ng-click="removePollOption($index)"><i class="fa fa-minus"></i></button></span>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12 col-md-6 col-md-offset-3">
+				<div class="form-group has-error plus text-left">
+					<p class="help-block help-block-error help-block-form">{{error.name}}</p>
+					<p class="help-block help-block-error help-block-form">{{error.option}}</p>
+				</div>
+				<div class="form-group has-success plus text-left">
+					<p class="help-block help-block-success help-block-form">{{success}}</p>
+				</div>
+				<div class="text-right plus plus-button">
+					<button id="pollOptionPlus" class="btn btn-default btn-lg" type="button" ng-disabled="created" ng-click="morePollOption()"><i class="fa fa-plus"></i></button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12 col-md-6 col-md-offset-3 text-center">
+				<input class="btn btn-primary btn-lg submit" id="submit" ng-disabled="created" type="submit" value="Submit">
+			</div>
+		</div>
+	</div>
+</form>
