@@ -53,11 +53,6 @@ angular.module('buildAVotingAppApp')
 		$http.get('/api/polls/' + $scope.user).success(function(polls) {
 			callback(polls);
 			$('body').addClass('loaded');
-			if($scope.isAuthor){
-				$('#authorSearch').focus();
-			}else if(!$scope.isAuthor){
-				$('#otherSearch').focus();
-			}
 			socket.syncUpdates('poll', $scope.polls, function(event, item, array) {
 				if($scope.view && !$scope.create){
 					callback(array);

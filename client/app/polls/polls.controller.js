@@ -42,7 +42,6 @@ angular.module('buildAVotingAppApp')
 		$http.get('/api/polls').success(function(polls) {
 			callback(polls);
 			$('body').addClass('loaded');
-			$('#search').focus();
 			socket.syncUpdates('poll', $scope.polls, function(event, item, array) {
 				callback(array);
 			});
