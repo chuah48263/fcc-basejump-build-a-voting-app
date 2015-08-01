@@ -1,10 +1,7 @@
-.poll-form {
-	margin: 20px 0;
-}
-
 #banner {
 	border-bottom: none;
 	margin-top: -20px;
+	margin-bottom: 30px;
 }
 
 #banner h1 {
@@ -25,6 +22,25 @@
 .footer {
 	text-align: center;
 	padding: 30px 0;
-	margin-top: 70px;
+	margin-top: 30px;
 	border-top: 1px solid #E5E5E5;
+}
+
+.fa-thumbnail {
+	font-size: 60px;
+	color: #666;
+}
+
+.jumbotron-middle {
+	background: #4393B9;
+	color: #fff;
+	border-color: #fff;
+	margin-right: 20px;
+	margin-left: 20px;
+}
+
+.jumbotron-side {
+	background: #4393B9;
+	color: #fff;
+	border-color: #fff;
 }

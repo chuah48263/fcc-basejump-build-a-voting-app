@@ -81,10 +81,10 @@ angular.module('buildAVotingAppApp')
 
 				$('#name').focus();
 
-				$scope.loginOauth = function(provider) {
-					$('body').removeClass('loaded');
-					$window.location.href = '/auth/' + provider;
-				};
+				// $scope.loginOauth = function(provider) {
+				// 	$('body').removeClass('loaded');
+				// 	$window.location.href = '/auth/' + provider;
+				// };
 			}
 		});
 	});

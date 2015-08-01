@@ -16,19 +16,24 @@ exports.setup = function(User, config) {
 					'facebook.id': profile.id
 				},
 				function(err, user) {
+					console.log(profile);
 					if (err) {
 						return done(err);
 					}
 					if (!user) {
 						user = new User({
-							name: profile.displayName,
-							email: profile.emails[0].value,
+							name: profile.emails[0].value.toLowerCase().replace(/@.+/, ''),
+							email: profile.emails[0].value.toLowerCase(),
 							role: 'user',
 							provider: 'facebook',
 							facebook: profile._json
 						});
 						user.save(function(err) {
-							if (err) return done(err);
+							if (err) {
+								// console.log(err);
+								return done(err);
+							}
+							console.log(user);
 							done(err, user);
 						});
 					} else {

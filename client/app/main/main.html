@@ -1,39 +1,35 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 <header class="hero-unit" id="banner">
 	<div class="container">
-		<h1>FCC Basejump</h1>
-		<p class="lead">Build a Voting App</p>
+		<h1>Pollnomena</h1>
+		<p class="lead">FCC Basejump: Build a Voting App</p>
+		<a ng-hide="loggedIn" class="btn btn-default btn-lg jumbotron-side" href="/polls" role="button">All Polls</a>
+		<a ng-hide="loggedIn" class="btn btn-default btn-lg jumbotron-middle" href="/signup" role="button">Signup</a>
+		<a ng-hide="loggedIn" class="btn btn-default btn-lg jumbotron-side" href="/login" role="button">Login</a>
+		<a ng-show="loggedIn" class="btn btn-default btn-lg jumbotron-side" href="/polls" role="button">All Polls</a>
+		<a ng-show="loggedIn" class="btn btn-default btn-lg jumbotron-middle" ng-href="{{'/' + author + '?action=create'}}" role="button">Create Poll</a>
+		<a ng-show="loggedIn" class="btn btn-default btn-lg jumbotron-side" ng-href="{{'/' + author}}" role="button">Your Polls</a>
 	</div>
 </header>
 <div class="container">
 	<div class="row">
-		<div class="col-lg-12">
-			<div class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="poll in polls track by $index">
-				<div>{{poll.pollName}}
-					<div class="radio" ng-repeat="pollOption in poll.pollOptions track by $index">
-						<label><input type="radio" name="optradio" ng-click="votePoll(poll, $index)" ng-value="pollOption.label">{{pollOption.label}}: {{pollOption.value}}</label>
-					</div>
-					<button type="button" class="close" ng-click="deletePoll(poll)">&times;</button>
-				</div>
-			</ul>
+		<div class="col-xs-6 col-md-3 text-center">
+			<i class="fa fa-pie-chart fa-thumbnail"></i>
+			<h4>View your poll results in the form of 'Doughnut' chart, which is applied through the integration of <a href="http://www.chartjs.org/">Chart.js</a>.</h4>
+		</div>
+		<div class="col-xs-6 col-md-3 text-center">
+			<i class="fa fa-table fa-thumbnail"></i>
+			<h4>View your poll analysis in a table, which appears just beside the chart. Need not worry about analysing anymore</h4>
+		</div>
+		<div class="col-xs-6 col-md-3 text-center">
+			<i class="fa fa-pencil fa-thumbnail"></i>
+			<h4>Get random colors for your poll options by just a simple click. The colors will then be rendered on its own respective chart.</h4>
+		</div>
+		<div class="col-xs-6 col-md-3 text-center">
+			<i class="fa fa-share fa-thumbnail"></i>
+			<h4>Share your polls with your friends through Facebook, Google+ and Twitter, with its own unique shortened link.</h4>
 		</div>
 	</div>
-	<form class="poll-form">
-		<label>Syncs in realtime across clients</label>
-		<p class="input-group">
-			<input type="text" class="form-control" placeholder="Add a new poll here." ng-model="pollName">
-			<fieldset data-ng-repeat="pollOption in pollOptions track by $index">
-				<input type="text" ng-model="pollOption.label" class="form-control">
-				<button type="button" class="close" ng-click="removePollOption($index)">-</button>
-			</fieldset>
-			<span class="input-group-btn">
-				<button type="button" class="btn btn-primary" ng-click="addPollOption()">+</button>
-			</span>
-			<span class="input-group-btn">
-				<button type="submit" class="btn btn-primary" ng-click="addPoll()">Add New</button>
-			</span>
-		</p>
-	</form>
 </div>
 <footer class="footer">
 	<div class="container">

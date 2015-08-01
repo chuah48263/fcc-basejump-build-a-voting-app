@@ -63,11 +63,11 @@ angular.module('buildAVotingAppApp')
 
 				$('#name').focus();
 
-				$scope.loginOauth = function(provider) {
-					$('body').removeClass('loaded');
-					$window.location.href = '/auth/' + provider;
-					console.log(provider);
-				};
+				// $scope.loginOauth = function(provider) {
+				// 	$('body').removeClass('loaded');
+				// 	$window.location.href = '/auth/' + provider;
+				// 	console.log(provider);
+				// };
 			}
 		});
 	});
