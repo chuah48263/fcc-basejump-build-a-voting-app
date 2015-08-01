@@ -45,7 +45,22 @@
 	border-color: #fff;
 }
 
-.jumbotron-xs {
-	margin-top: 10px;
+.jumbotron-top {
+	background: #4393B9;
+	color: #fff;
+	border-color: #fff;
 	margin-bottom: 10px;
+}
+
+.jumbotron-left {
+	background: #4393B9;
+	color: #fff;
+	border-color: #fff;
+	margin-right: 10px;
+}
+
+.jumbotron-right {
+	background: #4393B9;
+	color: #fff;
+	border-color: #fff;
 }
