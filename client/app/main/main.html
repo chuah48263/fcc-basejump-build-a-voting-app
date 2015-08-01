@@ -16,7 +16,7 @@
 				<a ng-hide="loggedIn" class="btn btn-default btn-lg jumbotron-side" href="/polls" role="button">All Polls</a>
 			</div>
 			<div class="col-xs-12 visible-xs">
-				<a ng-hide="loggedIn" class="btn btn-default btn-lg jumbotron-middle" href="/signup" role="button">Signup</a>
+				<a ng-hide="loggedIn" class="btn btn-default btn-lg jumbotron-middle jumbotron-xs" href="/signup" role="button">Signup</a>
 			</div>
 			<div class="col-xs-12 visible-xs">
 				<a ng-hide="loggedIn" class="btn btn-default btn-lg jumbotron-side" href="/login" role="button">Login</a>
@@ -25,7 +25,7 @@
 				<a ng-show="loggedIn" class="btn btn-default btn-lg jumbotron-side" href="/polls" role="button">All Polls</a>
 			</div>
 			<div class="col-xs-12 visible-xs">
-				<a ng-show="loggedIn" class="btn btn-default btn-lg jumbotron-middle" ng-href="{{'/' + author + '?action=create'}}" role="button">Create Poll</a>
+				<a ng-show="loggedIn" class="btn btn-default btn-lg jumbotron-middle jumbotron-xs" ng-href="{{'/' + author + '?action=create'}}" role="button">Create Poll</a>
 			</div>
 			<div class="col-xs-12 visible-xs">
 				<a ng-show="loggedIn" class="btn btn-default btn-lg jumbotron-side" ng-href="{{'/' + author}}" role="button">Your Polls</a>
